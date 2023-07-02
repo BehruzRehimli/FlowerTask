@@ -1,0 +1,50 @@
+﻿@model List<Flower>
+@{
+    int count = 1;
+}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <h1 class="mt-5 ms-3" style="margin-right:50px">Flower</h1>
+                <div class="text-end mb-5 me-3">
+                    <a asp-controller="flower" asp-action="Create" class="btn btn-primary" style="color:white">Add Flower</a>
+                </div>
+                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category count</th>
+      <th scope="col">Image</th>
+      <th scope="col">Change</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+                    @foreach (Flower item in Model)
+                    {
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price$</td>
+                                    <td>@item.FlowerCatagories.Count</td>
+                                    <td>
+                                        <img style="width:70%;height:150px" src="~/manage/upload/flower/@(item.Images[0].ImageName)"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-controller="flower" asp-action="edit" asp-route-id=@item.Id class="btn btn-warning mb-2 text-white">Edit</a><br/>
+                                        <a asp-controller="flower" asp-action="delete" asp-route-id=@item.Id class="btn btn-danger text-white">Delete</a>
+                                    </td>
+
+                                </tr>
+                        count++;
+                    }
+  </tbody>
+</table>
+            </div>
+        </div>
+
+    </div>
